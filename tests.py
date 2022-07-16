@@ -1,15 +1,9 @@
-import unittest
-
 import pymongo
-
 from main import kill_process
-
-import mongomock
-
 
 
 def test_kill_process():
     client = pymongo.MongoClient('server.example.com')
-    db_name = client.get_database('admin')
-    assert kill_process("db_name", "host", "port", "collection_name", "time_in_seconds")
-
+    db = client.get_database('admin')
+    # query = db.test.find( { $where: function() { return sleep(600) || true }}).pretty();
+    assert kill_process(db, "host", "port", "time_in_seconds")
